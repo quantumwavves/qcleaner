@@ -17,13 +17,15 @@ if(-not (Test-Administrator))
 function General {
     #---------------------Clean Temp Files for Admin User System----------------#
     Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-    Write-Output "Temporary files cleared" 
-    #-------------------Clean Temp Files for User-------------------#
-    Get-ChildItem -Path "$env:temp" *.* -Recurse | Remove-Item -Force -Recurse
-    Write-Output "Temporary files user cleared"
+    Write-Output "Temporary files cleared"
     #-------------------Clean Logs--------------------#
     Get-ChildItem -Path "C:\Windows\Logs\CBS" *.log -Recurse | Remove-Item -Force -Recurse
     Write-Output "Temporary log files cleared"
+}
+function UserFiles {
+    #-------------------Clean Temp Files for User-------------------#
+    Get-ChildItem -Path "$env:temp" *.* -Recurse | Remove-Item -Force -Recurse
+    Write-Output "Temporary files user cleared"
     #---------------Clear Recycle Bin------------#
     Clear-RecycleBin -Force
     Write-Output "Recycle bin cleared"
@@ -113,5 +115,5 @@ function FirefoxCleaner {
         Write-Output "Firefox temporary files cleared"
     }
 }
-General
+UserFiles
 Browser
